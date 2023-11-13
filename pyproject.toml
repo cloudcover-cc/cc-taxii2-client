@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cc_taxii2_client"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Nick Bowling", email="nbowling@cloudcover.net" },
 ]
@@ -25,4 +25,4 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/cc-cloudcover/cc-taxii2-client"
+"Homepage" = "https://github.com/cloudcover-cc/cc-taxii2-client"
