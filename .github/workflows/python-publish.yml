@@ -53,8 +53,10 @@ jobs:
     name: >-
       Sign the Python 🐍 distribution 📦 with Sigstore
       and upload them to GitHub Release
+      if: startsWith(github.ref, 'refs/tags/')
     needs:
-    - publish-to-pypi
+      # - publish-to-pypi
+      - build
     runs-on: ubuntu-latest
  
     permissions:
