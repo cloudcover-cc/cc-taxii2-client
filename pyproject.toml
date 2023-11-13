@@ -25,4 +25,4 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/cc-cloudcover/cc-taxii2-client"
+"Homepage" = "https://github.com/cloudcover-cc/cc-taxii2-client"
