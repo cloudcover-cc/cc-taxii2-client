@@ -1,4 +1,5 @@
-name: Publish Python 🐍 distribution 📦 to PyPI
+# name: Publish Python 🐍 distribution 📦 to PyPI
+name: Build Python distribution and Release
  
 on: push
  

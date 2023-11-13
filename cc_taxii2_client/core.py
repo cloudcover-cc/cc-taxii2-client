@@ -52,8 +52,7 @@ class CCTaxiiClient(TaxiiClient):
 
     def __init__(self, account: str, api_key: str) -> None:
         super().__init__(account, api_key)
-        self.url: str = "http://127.0.0.1:5000"
-        # self.url: str = "https://taxii2.cloudcover.net"
+        self.url: str = "https://taxii2.cloudcover.net"
 
     def get_collections(self, root: str = "api") -> list[str]:
         """Retrieve collection IDs for API root.
