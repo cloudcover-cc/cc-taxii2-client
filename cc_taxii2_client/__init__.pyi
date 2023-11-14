@@ -1,13 +1,16 @@
 """__init__.pyi"""
 
 from __future__ import annotations
-from typing import Generator
-from abc import ABC
+from typing import Protocol, Generator
+from dataclasses import dataclass
+from abc import ABCMeta, abstractmethod
 from requests.models import Response
 
 
 class TaxiiError(Exception):
-    ...
+
+    def __init__(self, msg: str) -> None:
+        ...
 
 
 class TaxiiCollectionError(TaxiiError):
@@ -30,14 +33,17 @@ class TaxiiFilterError(TaxiiError):
     ...
 
 
-class Stix2ObjectBase(ABC):
+@dataclass
+class Stix2ObjectBase(Protocol):
     ...
 
 
-class EnvelopeBase(ABC):
+@dataclass
+class EnvelopeBase(Protocol):
     ...
 
 
+@dataclass
 class CCIndicator(Stix2ObjectBase):
     created: str
     description: str
@@ -52,36 +58,57 @@ class CCIndicator(Stix2ObjectBase):
     valid_from: str
 
 
+@dataclass
 class Envelope(EnvelopeBase):
     objects: list[dict[str, str]] | None
     more: bool | None
     next: str | None
 
 
-class TaxiiClient(ABC):
+class TaxiiClient(metaclass=ABCMeta):
 
     def __init__(self, account: str, api_key: str) -> None:
         ...
 
+    @abstractmethod
     def get_collections(self, root: str) -> list[str]:
         ...
 
+    @abstractmethod
     def _taxii_request(self, root: str, collection_id: str,
                        parameters: str) -> Response:
         ...
 
+    @abstractmethod
     def _get_json(self, root: str, collection_id: str,
                   parameters: str) -> EnvelopeBase:
         ...
 
     def get_stix2_objects(self, root: str, collection_id: str | None,
                           limit: int, added_after: str | None,
-                          match: dict[str, str] | None,
+                          matches: dict[str, str] | None,
                           follow_pages: bool) -> list[Stix2ObjectBase]:
         ...
 
 
 class CCTaxiiClient(TaxiiClient):
+
+    def __init__(self, account: str, api_key: str) -> None:
+        ...
+
+    @abstractmethod
+    def get_collections(self, root: str) -> list[str]:
+        ...
+
+    @abstractmethod
+    def _taxii_request(self, root: str, collection_id: str,
+                       parameters: str) -> Response:
+        ...
+
+    @abstractmethod
+    def _get_json(self, root: str, collection_id: str,
+                  parameters: str) -> EnvelopeBase:
+        ...
 
     def get_cc_indicators_generator(
         self,
@@ -89,7 +116,7 @@ class CCTaxiiClient(TaxiiClient):
         limit: int = 1000,
         private: bool = False,
         added_after: str | None = None,
-        match: dict[str, str] | None = None,
+        matches: dict[str, str] | None = None,
         follow_pages: bool = False
     ) -> Generator[list[CCIndicator], None, None]:
         ...

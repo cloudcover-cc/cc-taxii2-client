@@ -132,7 +132,7 @@ class CCTaxiiClient(TaxiiClient):
         limit: int = 1000,
         private: bool = False,
         added_after: str | None = None,
-        match: dict[str, str] | None = None,
+        matches: dict[str, str] | None = None,
         follow_pages: bool = False
     ) -> Generator[list[CCIndicator], None, None]:
         """Send a GET request to the TAXII2.1 server with provided
@@ -150,7 +150,7 @@ class CCTaxiiClient(TaxiiClient):
                                       %Y-%m-%dT%H:%M:%S.%fZ. Will only return
                                       Indicators added after this datetime.
                                       Default None will return all Indicators.
-            match (dict[str, str]) | None: Dictionary of {field: value} for
+            matches (dict[str, str]) | None: Dictionary of {field: value} for
                                            match filtering. Valid fields are:
                                            id, spec_version, type, and version.
                                            Multiple values may be used for the
@@ -178,10 +178,10 @@ class CCTaxiiClient(TaxiiClient):
                 raise TaxiiDatetimeError(
                     "Invalid datetime format. Expected %Y-%m-%dT%H:%M:%S.%fZ"
                 ) from exc
-        if match:
-            if not all(key in match_fields for key in match.keys()):
+        if matches:
+            if not all(key in match_fields for key in matches.keys()):
                 raise TaxiiFilterError("Illegal filter match field")
-            for k, v in match.items():
+            for k, v in matches.items():
                 match_string = f"&match[{k}]={v}"
                 objects_string += match_string
 

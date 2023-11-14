@@ -99,7 +99,7 @@ class TaxiiClient(ABC):
     # pylint: disable=too-many-arguments
     def get_stix2_objects(self, root: str, collection_id: str | None,
                           limit: int, added_after: str | None,
-                          match: dict[str, str] | None,
+                          matches: dict[str, str] | None,
                           follow_pages: bool) -> list[Stix2ObjectBase]:
         """Send a GET request to the TAXII2.1 server with provided
         parameters and return a list of STIX2.1 Objects.
@@ -113,7 +113,7 @@ class TaxiiClient(ABC):
             added_after (str | None): Timestamp in the format  of
                                       %Y-%m-%dT%H:%M:%S.%fZ. Will only return
                                       Objects added after this datetime.
-            match (dict[str, str]) | None: Dictionary of {field: value} for
+            matches (dict[str, str]) | None: Dictionary of {field: value} for
                                            match filtering. Valid fields are:
                                            id, spec_version, type, and version.
                                            Multiple values may be used for the
