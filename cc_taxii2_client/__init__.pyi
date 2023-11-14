@@ -1,9 +1,9 @@
 """__init__.pyi"""
 
 from __future__ import annotations
-from typing import Generator, Protocol
+from typing import Protocol, Generator
 from dataclasses import dataclass
-from abc import abstractmethod
+from abc import ABCMeta, abstractmethod
 from requests.models import Response
 
 
@@ -65,7 +65,7 @@ class Envelope(EnvelopeBase):
     next: str | None
 
 
-class TaxiiClient(Protocol):
+class TaxiiClient(metaclass=ABCMeta):
 
     def __init__(self, account: str, api_key: str) -> None:
         ...
@@ -92,6 +92,23 @@ class TaxiiClient(Protocol):
 
 
 class CCTaxiiClient(TaxiiClient):
+
+    def __init__(self, account: str, api_key: str) -> None:
+        ...
+
+    @abstractmethod
+    def get_collections(self, root: str) -> list[str]:
+        ...
+
+    @abstractmethod
+    def _taxii_request(self, root: str, collection_id: str,
+                       parameters: str) -> Response:
+        ...
+
+    @abstractmethod
+    def _get_json(self, root: str, collection_id: str,
+                  parameters: str) -> EnvelopeBase:
+        ...
 
     def get_cc_indicators_generator(
         self,
