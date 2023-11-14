@@ -39,7 +39,7 @@ conection.get_collections("testaccount")
 711
 >>>
 >>> from itertools import chain
->>> generate_indicators = connection.get_cc_indicators_generator(private=True, follow_pages=True, match={"type": "indicator", "id": "indicator--5c46d792-93a9-435c-a04f-b843de740fe6,indicator--6b405c16-ac9b-4446-8d13-1cc17a4cf867"})
+>>> generate_indicators = connection.get_cc_indicators_generator(private=True, follow_pages=True, matches={"type": "indicator", "id": "indicator--5c46d792-93a9-435c-a04f-b843de740fe6,indicator--6b405c16-ac9b-4446-8d13-1cc17a4cf867"})
 >>> list(chain(*generate_indicators))
 [CCIndicator(created='2023-11-03T19:07:51.812746Z', description='#Recon# ICMP PING', id='indicator--5c46d792-93a9-435c-a04f-b843de740fe6', modified='2023-11-03T19:07:51.812746Z', name='CloudCover Detected IOC', pattern="[ipv4-addr:value = '13.127.11.123']", pattern_type='stix', pattern_version='2.1', spec_version='2.1', type='indicator', valid_from='2023-11-03T19:07:51.812746Z'), CCIndicator(created='2023-11-03T19:07:51.817258Z', description='#Recon# ICMP PING', id='indicator--6b405c16-ac9b-4446-8d13-1cc17a4cf867', modified='2023-11-03T19:07:51.817258Z', name='CloudCover Detected IOC', pattern="[ipv4-addr:value = '34.218.245.10']", pattern_type='stix', pattern_version='2.1', spec_version='2.1', type='indicator', valid_from='2023-11-03T19:07:51.817258Z')]
 
