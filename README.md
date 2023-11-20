@@ -6,12 +6,12 @@
 ## Minimal CloudCover TAXII2.1 Python client library.
 
 ### Installation
-To install Tap from PyPI run:
+To install from PyPI run:
 ```
 pip install cc-taxii2-client
 ```
 
-To install Tap from source, run the following commands:
+To install from source, run the following commands:
 ```
 git clone https://github.com/cloudcover-cc/cc-taxii2-client
 cd cc-taxii2-client
