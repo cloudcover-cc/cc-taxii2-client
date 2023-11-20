@@ -121,6 +121,9 @@ class CCTaxiiClient(TaxiiClient):
             response_json = Envelope(**loads(response.text))
         except JSONDecodeError as exc:
             raise TaxiiAuthorizationError("Unknown credentials.") from exc
+        except TypeError as exc:
+            raise TaxiiConnectionError(
+                "Could not connect to the TAXII2.1 server.") from exc
         return response_json
 
     # pylint: disable=too-many-arguments
@@ -180,7 +183,7 @@ class CCTaxiiClient(TaxiiClient):
                 ) from exc
         if matches:
             if not all(key in match_fields for key in matches.keys()):
-                raise TaxiiFilterError("Illegal filter match field")
+                raise TaxiiFilterError("Illegal filter match field.")
             for k, v in matches.items():
                 match_string = f"&match[{k}]={v}"
                 objects_string += match_string
