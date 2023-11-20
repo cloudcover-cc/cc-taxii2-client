@@ -25,7 +25,7 @@ def _search(
     """
     return [
         indicator for page in indicators if page for indicator in page
-        if keyword in getattr(indicator, field, "")
+        if keyword.lower() in getattr(indicator, field, "").lower()
     ]
 
 

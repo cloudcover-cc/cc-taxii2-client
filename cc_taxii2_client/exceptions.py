@@ -15,7 +15,7 @@ class TaxiiError(Exception):
     """
 
     def __init__(self, msg: str) -> None:
-        """fart.
+        """Initialize TaxiiError base class.
 
         Args:
             msg (str): Human readable string describing the exception.
