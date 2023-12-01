@@ -165,7 +165,7 @@ class CCTaxiiClient(TaxiiClient):
                                  False to return only the supplied or
                                  default/max limit. Default is False.
 
-        Returns:
+        YIELDS:
             Generator[list[CCIndicator], None, None]: A list of CloudCover
                                                       STIX2.1 Indicators
                                                       Objects from the request.

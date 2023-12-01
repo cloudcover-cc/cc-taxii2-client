@@ -66,7 +66,7 @@ generate_indicators = connection.get_cc_indicators_generator(
 
 # Yield the pages of indicators:
 next(generate_indicators)
-# RETURNS:
+# YIELDS:
 # [
 #     CCIndicator(created='2023-11-03T19:07:51.812746Z',
 #                 description='#Recon# ICMP PING',
