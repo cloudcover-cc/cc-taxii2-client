@@ -28,6 +28,7 @@ class TaxiiClient(ABC):
         session (Session): The request session.
     """
 
+    @abstractmethod
     def __init__(self, account: str, api_key: str) -> None:
         """
         Initialize Taxii2.1 client base class.

@@ -3,7 +3,7 @@
 from __future__ import annotations
 from typing import Protocol, Generator
 from dataclasses import dataclass
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 from requests.models import Response
 
 
@@ -65,8 +65,9 @@ class Envelope(EnvelopeBase):
     next: str | None
 
 
-class TaxiiClient(metaclass=ABCMeta):
+class TaxiiClient(ABC):
 
+    @abstractmethod
     def __init__(self, account: str, api_key: str) -> None:
         ...
 
@@ -96,16 +97,13 @@ class CCTaxiiClient(TaxiiClient):
     def __init__(self, account: str, api_key: str) -> None:
         ...
 
-    @abstractmethod
     def get_collections(self, root: str) -> list[str]:
         ...
 
-    @abstractmethod
     def _taxii_request(self, root: str, collection_id: str,
                        parameters: str) -> Response:
         ...
 
-    @abstractmethod
     def _get_json(self, root: str, collection_id: str,
                   parameters: str) -> EnvelopeBase:
         ...

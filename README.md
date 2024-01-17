@@ -121,7 +121,7 @@ len(indicators)
 # 264
 
 # Create a generator object that yields all indicators in the private root
-#   silo default collection, grouped in pages of 1000 (fefault) indicators,
+#   silo default collection, grouped in pages of 1000 (default) indicators,
 #   of type "indicator" that match the two indicator IDs given. Then combine
 #   all found indicator objects into a single list:
 generate_indicators = connection.get_cc_indicators_generator(

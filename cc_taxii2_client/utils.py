@@ -12,20 +12,20 @@ def _search(
     """Search for field defined keyword in data yielded by the Indicator
     generator.
     Args:
-        field (str):
-        keyword (str):
+        field (str): Indicator field to search.
+        keyword (str): Keyword to search for in indicator field.
         indicators (Generator[list[CCIndicator], None, None]): Generator
                                                                function
                                                                returning list
                                                                of Indicators.
 
     Returns:
-        list[CCIndicators]: List of indicators with matching keyword in
+        list[CCIndicator]: List of indicators with matching keyword in
                             specified field.
     """
     return [
         indicator for page in indicators if page for indicator in page
-        if keyword.lower() in getattr(indicator, field, "").lower()
+        if keyword in getattr(indicator, field, "")
     ]
 
 
@@ -60,7 +60,7 @@ def ip_search(
                                                                of Indicators.
 
     Returns:
-        list[CCIndicators]: List of Indicators with matching ip address in
+        list[CCIndicator]: List of Indicators with matching ip address in
                           pattern field.
 
     """
@@ -81,7 +81,7 @@ def description_search(
                                                                of Indicators.
 
     Returns:
-        list[CCIndicators]: List of indicators with matching ip address in
+        list[CCIndicator]: List of indicators with matching ip address in
                           pattern field.
 
     """
